@@ -4,11 +4,13 @@ from graia.ariadne.message.chain import MessageChain
 from graia.ariadne.model import Group, MiraiSession, Member
 from graia.scheduler import GraiaScheduler
 import pkgutil
+from pathlib import Path
 from graia.ariadne.app import Ariadne
 from graia.ariadne.model import MiraiSession
 from graia.saya import Saya
 from graia.saya.builtins.broadcast import BroadcastBehaviour
 from graia.scheduler.saya import GraiaSchedulerBehaviour
+from graia.ariadne.message.element import Forward, ForwardNode, Image
 
 app = Ariadne(
     MiraiSession(
@@ -52,6 +54,11 @@ async def setu(app: Ariadne, group: Group, message: MessageChain):
         await app.sendMessage(
             group,
             MessageChain.create(f"周年皮肤包链接：https://zihao-il.github.io/index2.html"),
+        )
+    if str(message) == "鼻涕的肯定":
+        await app.sendMessage(
+            group,
+            MessageChain.create(Image(path=Path("data/鼻涕的肯定.jpg"))),
         )
 
 app.launch_blocking()
