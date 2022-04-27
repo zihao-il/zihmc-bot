@@ -1,4 +1,3 @@
-from graia.ariadne.model import Group, Member
 from graia.saya import Channel
 import json
 import re
@@ -33,17 +32,17 @@ async def mcbv(app: Ariadne):
     try:
         mcr = requests.get("https://bugs.mojang.com/rest/api/2/project/10200/versions", headers=headers)
         data = json.loads(mcr.text)
+        for v in data:
+            if not v['archived'] and v['released']:
+                if re.match(r".*Beta$", v["name"]):
+                    beta = v["name"].split(" ")[0]
+                elif re.match(r".*Preview$", v["name"]):
+                    preview = v["name"].split(" ")[0]
+                else:
+                    release = v["name"].split(" ")[0]
     except:
         pass
 
-    for v in data:
-        if not v['archived'] and v['released']:
-            if re.match(r".*Beta$", v["name"]):
-                beta = v["name"].split(" ")[0]
-            elif re.match(r".*Preview$", v["name"]):
-                preview = v["name"].split(" ")[0]
-            else:
-                release = v["name"].split(" ")[0]
     path = "data/mc.json"
     with open(path, "r") as mcj:
 
