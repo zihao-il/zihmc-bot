@@ -17,19 +17,6 @@ qqgroup = [933238308, 855150997, 562664290, 196619774]
 @channel.use(SchedulerSchema(timers.every_custom_minutes(1)))
 async def mcbv(app: Ariadne):
     try:
-        releasej = requests.get(
-            'https://minecraftfeedback.zendesk.com/api/v2/help_center/en-us/sections/360001186971/articles?per_page=5',
-            headers=headers, timeout=3).text
-        releasej = json.loads(releasej)
-        betaj = requests.get(
-            'https://minecraftfeedback.zendesk.com/api/v2/help_center/en-us/sections/360001185332/articles?per_page=5',
-            headers=headers, timeout=3).text
-        betaj = json.loads(betaj)
-        fbr = releasej["articles"][0]["name"]
-        fbb = betaj["articles"][0]["name"]
-    except:
-        pass
-    try:
         mcr = requests.get("https://bugs.mojang.com/rest/api/2/project/10200/versions", headers=headers)
         data = json.loads(mcr.text)
         for v in data:
@@ -43,25 +30,24 @@ async def mcbv(app: Ariadne):
     except:
         pass
 
+    try:
+        releasej = requests.get(
+            'https://minecraftfeedback.zendesk.com/api/v2/help_center/en-us/sections/360001186971/articles?per_page=5',
+            headers=headers, timeout=3).text
+        releasej = json.loads(releasej)
+        betaj = requests.get(
+            'https://minecraftfeedback.zendesk.com/api/v2/help_center/en-us/sections/360001185332/articles?per_page=5',
+            headers=headers, timeout=3).text
+        betaj = json.loads(betaj)
+        fbr = releasej["articles"][0]["name"]
+        fbb = betaj["articles"][0]["name"]
+    except:
+        pass
+
     path = "data/mc.json"
     with open(path, "r") as mcj:
 
         mc_data = json.load(mcj)
-        try:
-            if mc_data['frelease'] != fbr:
-                for g in qqgroup:
-                    await app.sendGroupMessage(g, MessageChain.create(
-                        f'Minecraft Feedback 发布了新的文章：\n\n标题：\n{fbr}\n\n链接：\n{releasej["articles"][0]["html_url"]}'))
-
-                mc_data['frelease'] = fbr
-            if mc_data['fbeta'] != fbb:
-                for g in qqgroup:
-                    await app.sendGroupMessage(g, MessageChain.create(
-                        f'Minecraft Feedback 发布了新的文章：\n\n标题：\n{fbb}\n\n链接：\n{betaj["articles"][0]["html_url"]}'))
-                mc_data['fbeta'] = fbb
-        except:
-            pass
-
         try:
             if mc_data['release'] != release:
                 for g in qqgroup:
@@ -77,6 +63,22 @@ async def mcbv(app: Ariadne):
                 mc_data['preview'] = preview
         except:
             pass
+
+        try:
+            if mc_data['frelease'] != fbr:
+                for g in qqgroup:
+                    await app.sendGroupMessage(g, MessageChain.create(
+                        f'Minecraft Feedback 发布了新的文章：\n\n标题：\n{fbr}\n\n链接：\n{releasej["articles"][0]["html_url"]}'))
+
+                mc_data['frelease'] = fbr
+            if mc_data['fbeta'] != fbb:
+                for g in qqgroup:
+                    await app.sendGroupMessage(g, MessageChain.create(
+                        f'Minecraft Feedback 发布了新的文章：\n\n标题：\n{fbb}\n\n链接：\n{betaj["articles"][0]["html_url"]}'))
+                mc_data['fbeta'] = fbb
+        except:
+            pass
+
     with open(path, "w") as mcjup:
         json.dump(mc_data, mcjup)
 
