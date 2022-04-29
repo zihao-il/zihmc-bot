@@ -19,14 +19,20 @@ async def mcbv(app: Ariadne):
     try:
         mcr = requests.get("https://bugs.mojang.com/rest/api/2/project/10200/versions", headers=headers)
         data = json.loads(mcr.text)
+        release = []
+        beta = []
+        preview = []
         for v in data:
             if not v['archived'] and v['released']:
                 if re.match(r".*Beta$", v["name"]):
-                    beta = v["name"].split(" ")[0]
+                    beta.append(v["name"].split(" ")[0])
                 elif re.match(r".*Preview$", v["name"]):
-                    preview = v["name"].split(" ")[0]
+                    preview.append(v["name"].split(" ")[0])
                 else:
-                    release = v["name"].split(" ")[0]
+                    release.append(v["name"].split(" ")[0])
+        release = release[-1]
+        beta = beta[0]
+        preview = preview[0]
     except:
         pass
 
