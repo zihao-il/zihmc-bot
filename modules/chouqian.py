@@ -49,4 +49,4 @@ def cq(qqid):
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage], decorators=[MatchContent("抽签")]))
 async def chouqian(app: Ariadne, member: Member, group: Group):
-    await app.sendMessage(group, MessageChain.create(At(member.id), cq(member.id)))
+    await app.sendMessage(group, MessageChain.create(At(member.id), "\n", cq(str(member.id))))
