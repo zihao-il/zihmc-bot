@@ -15,7 +15,7 @@ channel = Channel.current()
 
 def get_json(name):
     try:
-        id_data = requests.get(f"https://ca.projectxero.top/idlist/search?q={name}&branch=translator").text
+        id_data = requests.get(f"https://ca.projectxero.top/idlist/search?q={name}&branch=translator&match=startswith").text
         json_name = json.loads(id_data)["data"]["result"][0]
     except:
         return "查询失败，没有此数据！！"
