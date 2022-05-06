@@ -1,0 +1,10 @@
+graia-ariadne
+graia-saya
+graiax-silkcoder
+graiax-silkcoder[ffmpeg]
+requests
+graia-scheduler
+re
+random
+datetime
+configparser
