@@ -8,3 +8,4 @@ re
 random
 datetime
 configparser
+Pillow
