@@ -1,6 +1,7 @@
+import asyncio
+
 import requests
 import json
-import time
 import random
 
 from graia.ariadne.event.message import GroupMessage
@@ -39,7 +40,7 @@ def get_id():
     return cid
 
 
-def sign():
+async def sign():
     try:
         cid = get_id()
     except:
@@ -48,7 +49,7 @@ def sign():
         for sid in cid:
             sign_url = f"http://floor.huluxia.com/user/signin/ANDROID/4.0??platform=2&gkey=000000&app_version=4.1.1.8.2&versioncode=344&market_id=tool_web&_key={key}&device_code=%5Bd%5Df832b6f8-7727-4fd5-b30c-e58c3c0b90a1&phone_brand_type=MI&cat_id={sid}"
             requests.get(sign_url, headers=headers)
-            time.sleep(random.randint(5, 10))
+            await asyncio.sleep(random.randint(5, 10))
     except:
         return "签到发生错误！\n如需重新签到请发送：三楼重新签到"
     return "全部板块已签到成功！"
@@ -56,12 +57,12 @@ def sign():
 
 @channel.use(SchedulerSchema(crontabify("00 6 * * *")))
 async def hlxsign(app: Ariadne):
-    await app.sendGroupMessage(536765401, MessageChain.create(sign()))
+    await app.sendGroupMessage(536765401, MessageChain.create(await sign()))
 
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage], decorators=[MatchContent("三楼重新签到")]))
 async def rehlxsign(app: Ariadne, member: Member, group: Group):
-    if member.id == "1767927045":
-        await app.sendGroupMessage(group, MessageChain.create(sign()))
+    if member.id == 1767927045:
+        await app.sendGroupMessage(group, MessageChain.create(await sign()))
     else:
         return
