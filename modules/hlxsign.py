@@ -35,7 +35,7 @@ def get_id():
     json_data = json.loads(url_date)["categories"]
 
     for i in json_data:
-        if i["icon"] != "" and i["title"] != "我的关注" and i["title"] != "三楼活动":
+        if i["categoryID"] != 0 and i["title"] != "三楼活动":
             cid.append(i["categoryID"])
     return cid
 
