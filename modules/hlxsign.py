@@ -27,6 +27,12 @@ with open("data/hlxsign.txt", "r", encoding="utf-8") as k:
     key = k.readline()
 
 
+def upkey(nkey):
+    with open("data/hlxsign.txt", "w+", encoding="utf-8") as kk:
+        kk.write(nkey)
+    return "key更新成功！"
+
+
 def get_id():
     cid = []
 
@@ -51,7 +57,7 @@ async def sign():
             requests.get(sign_url, headers=headers)
             await asyncio.sleep(random.randint(5, 10))
     except:
-        return "签到发生错误！\n如需重新签到请发送：三楼重新签到"
+        return '签到发生错误！\n如需重新签到请发送：三楼重新签到\n如需更新key请发送：三楼更新key"key"'
     return "全部板块已签到成功！"
 
 
@@ -64,5 +70,20 @@ async def hlxsign(app: Ariadne):
 async def rehlxsign(app: Ariadne, member: Member, group: Group):
     if member.id == 1767927045:
         await app.sendGroupMessage(group, MessageChain.create(await sign()))
+    else:
+        return
+
+
+@channel.use(ListenerSchema(
+    listening_events=[GroupMessage],
+    inline_dispatchers=[Twilight(
+        [FullMatch("三楼更新key").space(SpacePolicy.NOSPACE),
+         WildcardMatch() @ "ukey"]
+    )]
+))
+async def udkey(app: Ariadne, group: Group, member: Member, ukey: MatchResult):
+    if member.id == 1767927045:
+        ukey = ukey.result.replace(" ", "")
+        await app.sendMessage(group, MessageChain.create(upkey(ukey)))
     else:
         return

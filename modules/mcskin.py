@@ -17,16 +17,17 @@ saya = Saya.current()
 channel = Channel.current()
 inc = InterruptControl(saya.broadcast)
 
+
 def getskin(mcid):
     try:
         uuid = requests.get('https://api.mojang.com/users/profiles/minecraft/' + mcid).text
         uuid = json.loads(uuid)['id']
     except:
         msg = [
-            Plain("获取失败！用户不存在"),
+            Plain(f'获取失败！没有此用户："{mcid}"'),
         ]
         return msg
-    skinj = requests.get('https://sessionserver.mojang.com/session/minecraft/profile/'+uuid).text
+    skinj = requests.get('https://sessionserver.mojang.com/session/minecraft/profile/' + uuid).text
     skinj = json.loads(skinj)
     b64 = skinj['properties'][0]['value']
     scurl = base64.b64decode(b64).decode("utf-8", "ignore")
@@ -48,16 +49,18 @@ def getskin(mcid):
     ]
     return msg
 
+
 @channel.use(ListenerSchema(
     listening_events=[GroupMessage],
     inline_dispatchers=[Twilight(
-        [FullMatch("皮肤获取").space(SpacePolicy.FORCE),
+        [FullMatch("皮肤获取").space(SpacePolicy.NOSPACE),
          WildcardMatch() @ "mcid"]
     )]
 ))
-async def mcname(app: Ariadne, group: Group, member: Member,mcid: MatchResult):
-    mcid = mcid.result.replace(" ","")
+async def mcname(app: Ariadne, group: Group, member: Member, mcid: MatchResult):
+    mcid = mcid.result.replace(" ", "")
     await app.sendMessage(group, MessageChain.create(getskin(mcid)))
+
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage], decorators=[MatchContent("皮肤获取")]))
 async def mcname(app: Ariadne, group: Group, member: Member):
@@ -67,8 +70,9 @@ async def mcname(app: Ariadne, group: Group, member: Member):
     async def getmcskin(g: Group, m: Member, msg: MessageChain):
         if group.id == g.id and member.id == m.id:
             return msg
+
     try:
-        mcid = await inc.wait(getmcskin, timeout=30)
+        mcid = await inc.wait(await getmcskin, timeout=30)
     except asyncio.TimeoutError:
         await app.sendMessage(group, MessageChain.create("超时了，请重新发送"))
     else:
