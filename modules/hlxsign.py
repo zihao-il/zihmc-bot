@@ -85,6 +85,8 @@ async def rehlxsign(app: Ariadne, member: Member, group: Group):
 async def udkey(app: Ariadne, group: Group, member: Member, ukey: MatchResult):
     if member.id == 1767927045:
         ukey = ukey.result.replace(" ", "")
-        await app.sendMessage(group, MessageChain.create(upkey(ukey)))
+        await app.sendMessage(group, MessageChain.create(upkey(ukey), "即将为你重新签到！"))
+        await asyncio.sleep(3)
+        await app.sendGroupMessage(group, MessageChain.create(await sign()))
     else:
         return
