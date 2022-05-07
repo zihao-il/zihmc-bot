@@ -26,7 +26,7 @@ def get_json(name):
 @channel.use(ListenerSchema(
     listening_events=[GroupMessage],
     inline_dispatchers=[Twilight(
-        [FullMatch("/id表").space(SpacePolicy.FORCE),
+        [FullMatch("/id表").space(SpacePolicy.NOSPACE),
          WildcardMatch() @ "mcid"]
     )]
 ))
