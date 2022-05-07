@@ -6,6 +6,7 @@ import random
 
 from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.message.parser.base import MatchContent
+from graia.ariadne.message.parser.twilight import Twilight, FullMatch, WildcardMatch, SpacePolicy, MatchResult
 from graia.ariadne.model import Group, Member
 from graia.saya.builtins.broadcast import ListenerSchema
 from graia.scheduler.timers import crontabify
@@ -50,7 +51,7 @@ async def sign():
     try:
         cid = get_id()
     except:
-        return "获取板块id错误！\n如需重新签到请发送：三楼重新签到"
+        return '获取板块id错误！\n如需重新签到请发送：三楼重新签到\n如需更新key请发送：三楼更新key"key"'
     try:
         for sid in cid:
             sign_url = f"http://floor.huluxia.com/user/signin/ANDROID/4.0??platform=2&gkey=000000&app_version=4.1.1.8.2&versioncode=344&market_id=tool_web&_key={key}&device_code=%5Bd%5Df832b6f8-7727-4fd5-b30c-e58c3c0b90a1&phone_brand_type=MI&cat_id={sid}"
