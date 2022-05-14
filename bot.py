@@ -37,6 +37,8 @@ bcc = app.broadcast
 
 @bcc.receiver("MemberLeaveEventQuit")
 async def tuiqun(app: Ariadne, group: Group, message: MemberLeaveEventQuit):
+    if group == 812057174:
+        return
     await app.sendMessage(
         group,
         MessageChain.create(f'退群通知：\n@{message.member.name}({message.member.id})\n退出了本群！'),
