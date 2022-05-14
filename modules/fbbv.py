@@ -19,7 +19,7 @@ path = "data/mcfb.json"
 qqgroup = [933238308, 855150997, 562664290, 196619774]
 
 @channel.use(SchedulerSchema(timers.every_custom_minutes(1)))
-async def mcbv(app: Ariadne):
+async def fbbv(app: Ariadne):
 
 
     with open(path, "r") as b:
