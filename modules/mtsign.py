@@ -20,7 +20,7 @@ with open("data/mtsign.txt", "r", encoding="utf-8") as c:
 
 def upcookie(ck):
     with open("data/mtsign.txt", "w+", encoding="utf-8") as cc:
-        cc.write(ck)
+        cc.write(str(ck))
     return "cookie更新成功！"
 
 
