@@ -10,7 +10,8 @@ from graia.ariadne.model import MiraiSession
 from graia.saya import Saya
 from graia.saya.builtins.broadcast import BroadcastBehaviour
 from graia.scheduler.saya import GraiaSchedulerBehaviour
-from graia.ariadne.message.element import Forward, ForwardNode, Image
+from graia.ariadne.message.element import Forward, ForwardNode, Image, Voice
+from graiax import silkcoder
 
 app = Ariadne(
     MiraiSession(
@@ -47,7 +48,7 @@ async def tuiqun(app: Ariadne, group: Group, message: MemberLeaveEventQuit):
 @bcc.receiver(GroupMessage)
 async def setu(app: Ariadne, group: Group, message: MessageChain):
     # if str(message) == "你好":
-    #     await app.sendMessag=
+    #     await app.sendMessag(
     #         group,
     #         MessageChain.create(f"不要说{message.asDisplay()}，来点涩图"),
     #     )
@@ -62,6 +63,11 @@ async def setu(app: Ariadne, group: Group, message: MessageChain):
             group,
             MessageChain.create(Image(path=Path("data/鼻涕的肯定.jpg"))),
         )
+    if str(message) == "鼻涕骂我":
+        for i in range(1, 4):
+            voice_bytes = await silkcoder.async_encode(f"data/鼻涕傻逼{i}.wav")
+            await app.sendGroupMessage(group, MessageChain.create(Voice(data_bytes=voice_bytes)))
 
 app.launch_blocking()
+
 
