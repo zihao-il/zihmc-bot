@@ -14,8 +14,7 @@ from graia.saya import Channel
 
 channel = Channel.current()
 
-with open("data/mtsign.txt", "r", encoding="utf-8") as c:
-    cookie = c.readline()
+
 
 
 def upcookie(ck):
@@ -24,14 +23,17 @@ def upcookie(ck):
     return "cookie更新成功！"
 
 
-link = "https://bbs.binmt.cc/plugin.php?id=k_misign:sign&operation=qiandao&format=text&formhash=填自己的"
-headers = {
-    'user-agent': 'Mozilla/5.0 (Linux; Android 11; zzz) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Mobile Safari/537.36',
-    'cookie': cookie
-}
+
 
 
 def mt_sign():
+    with open("data/mtsign.txt", "r", encoding="utf-8") as c:
+        cookie = c.readline()
+    link = "https://bbs.binmt.cc/plugin.php?id=k_misign:sign&operation=qiandao&format=text&formhash=填自己的"
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Linux; Android 11; zzz) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Mobile Safari/537.36',
+        'cookie': cookie
+    }
     sign_text = requests.get(url=link, headers=headers).text
     if bool(re.findall(r"您当前的访问请求当中含有非法字符，已经被系统拒绝", sign_text)):
         return 'cookie错误！请发送mt更新cookie"cookie"'

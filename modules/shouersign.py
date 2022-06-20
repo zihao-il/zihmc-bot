@@ -24,6 +24,8 @@ with open("data/shouersign.txt", "r", encoding="utf-8") as k:
 def upkey(nkey):
     with open("data/shouersign.txt", "w+", encoding="utf-8") as kk:
         kk.write(str(nkey))
+        key = kk.readline()
+        appid, authorization = key.split("+")
     return "Appid跟Authorization更新成功！"
 
 

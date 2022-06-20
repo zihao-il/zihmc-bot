@@ -31,6 +31,7 @@ with open("data/hlxsign.txt", "r", encoding="utf-8") as k:
 def upkey(nkey):
     with open("data/hlxsign.txt", "w+", encoding="utf-8") as kk:
         kk.write(str(nkey))
+        key = kk.readline()
     return "key更新成功！"
 
 
