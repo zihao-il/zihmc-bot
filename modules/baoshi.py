@@ -12,17 +12,31 @@ channel = Channel.current()
 
 @channel.use(SchedulerSchema(crontabify("30 6 * * *")))
 async def goodMorning(app: Ariadne):
-    voice_bytes = await silkcoder.async_encode("data/姜早上好.wav")
-    await app.sendGroupMessage(855150997, MessageChain.create(Voice(data_bytes=voice_bytes)))
+    await app.sendGroupMessage(855150997,
+                               MessageChain.create(Voice(data_bytes=await silkcoder.async_encode("data/姜早上好.wav"))))
+    await app.sendGroupMessage(1091061241,
+                               MessageChain.create(Voice(data_bytes=await silkcoder.async_encode("data/鼻涕早上好.wav"))))
 
 
 @channel.use(SchedulerSchema(crontabify("0 12 * * *")))
 async def goodNoon(app: Ariadne):
-    voice_bytes = await silkcoder.async_encode("data/姜中午好.wav")
-    await app.sendGroupMessage(855150997, MessageChain.create(Voice(data_bytes=voice_bytes)))
+    await app.sendGroupMessage(855150997,
+                               MessageChain.create(Voice(data_bytes=await silkcoder.async_encode("data/姜中午好.wav"))))
+    await app.sendGroupMessage(1091061241,
+                               MessageChain.create(Voice(data_bytes=await silkcoder.async_encode("data/鼻涕中午好.wav"))))
+
 
 @channel.use(SchedulerSchema(crontabify("0 20 * * *")))
 async def goodNight(app: Ariadne):
-    voice_bytes = await silkcoder.async_encode("data/姜晚上好.wav")
-    await app.sendGroupMessage(855150997, MessageChain.create(Voice(data_bytes=voice_bytes)))
+    await app.sendGroupMessage(855150997,
+                               MessageChain.create(Voice(data_bytes=await silkcoder.async_encode("data/姜晚上好.wav"))))
+    await app.sendGroupMessage(1091061241,
+                               MessageChain.create(Voice(data_bytes=await silkcoder.async_encode("data/鼻涕晚上好.wav"))))
+
+
+@channel.use(SchedulerSchema(crontabify("0 23 * * *")))
+async def wanan(app: Ariadne):
+    await app.sendGroupMessage(1091061241,
+                               MessageChain.create(Voice(data_bytes=await silkcoder.async_encode("data/鼻涕晚安.wav"))))
+
 
