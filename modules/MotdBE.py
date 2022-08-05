@@ -29,7 +29,15 @@ async def motdbe(ip, port):
         decoded_data = data[34: 34 + name_length].decode().split(";")
         delay = "%.2f" % ((end_time - start_time) * 1000)
         client.close()
-        msg = f"[{decoded_data[0]}服务器信息]\n描述文本：{decoded_data[1]}\n协议版本：{decoded_data[2]}\n游戏版本：{decoded_data[3]}\n在线人数：{decoded_data[4]}/{decoded_data[5]}\n地图名称：{decoded_data[7]}\n游戏模式：{decoded_data[8]}\n游戏延迟：{delay}ms"
+        if decoded_data[8].lower() == "Survival".lower():
+            gamemode = "生存模式"
+        elif decoded_data[8].lower() == "Creative".lower():
+            gamemode = "创造模式"
+        elif decoded_data[8].lower() == "Adventure".lower():
+            gamemode = "冒险模式"
+        else:
+            gamemode = "未知模式"
+        msg = f"[{decoded_data[0]}服务器信息]\n描述文本：{decoded_data[1]}\n协议版本：{decoded_data[2]}\n游戏版本：{decoded_data[3]}\n在线人数：{decoded_data[4]}/{decoded_data[5]}\n地图名称：{decoded_data[7]}\n游戏模式：{gamemode}\n游戏延迟：{delay}ms"
         return msg
     except:
         msg = "查询失败，无此服务器！"
