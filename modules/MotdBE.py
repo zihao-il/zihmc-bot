@@ -2,6 +2,7 @@ import re
 import socket
 import struct
 import time
+
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.message.chain import MessageChain
@@ -15,7 +16,7 @@ from graia.saya.builtins.broadcast import ListenerSchema
 channel = Channel.current()
 
 
-async def motdbe(ip, port):
+async def motdbe(ip: str, port: int):
     try:
         client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         client.settimeout(3)
@@ -53,10 +54,15 @@ async def motdbe(ip, port):
 ))
 async def motdbemsg(app: Ariadne, group: Group, member: Member, ip_port: MatchResult):
     try:
-        ip, port = ip_port.result.split(":")
-        ip = str(ip)
-        port = int(str(port))
-        print(1, type(ip))
+        ip_port = str(ip_port.result)
+        if bool(re.findall(":", ip_port)):
+            ip, port = ip_port.split(":")
+            ip = str(ip)
+            port = int(str(port))
+        else:
+            ip = str(ip_port)
+            port = 19132
+
         await app.sendMessage(group, MessageChain.create(At(member.id), f"\n", await motdbe(ip, port)))
     except:
         await app.sendMessage(group, MessageChain.create(At(member.id), f"\n格式错误！\n例如：/MotdBE 127.0.0.1:19132"))
