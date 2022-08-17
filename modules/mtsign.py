@@ -31,7 +31,7 @@ def mt_sign():
         cookie = c.readline()
     link = "https://bbs.binmt.cc/plugin.php?id=k_misign:sign&operation=qiandao&format=text&formhash=填自己的"
     headers = {
-        'user-agent': 'Mozilla/5.0 (Linux; Android 11; zzz) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Mobile Safari/537.36',
+        'user-agent': 'Mozilla/5.0 (Linux; Android 12; zzz) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Mobile Safari/537.36',
         'cookie': cookie
     }
     sign_text = requests.get(url=link, headers=headers).text
@@ -43,7 +43,7 @@ def mt_sign():
 
 @channel.use(SchedulerSchema(crontabify("00 6 * * *")))
 async def mtsign(app: Ariadne):
-    await app.sendGroupMessage(536765401, MessageChain.create(mt_sign()))
+    await app.sendGroupMessage(196619774, MessageChain.create(mt_sign()))
 
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage], decorators=[MatchContent("mt重新签到")]))
@@ -63,7 +63,7 @@ async def remtsign(app: Ariadne, member: Member, group: Group):
 ))
 async def ucookie(app: Ariadne, group: Group, member: Member, ucookie: MatchResult):
     if member.id == 1767927045:
-        ucookie = ucookie.result.replace(" ", "")
+        ucookie = ucookie.result
         await app.sendMessage(group, MessageChain.create(upcookie(ucookie), "即将为你重新签到！"))
         await asyncio.sleep(1)
         await app.sendGroupMessage(group, MessageChain.create(mt_sign()))
