@@ -1,73 +1,33 @@
-from graia.ariadne.event.message import GroupMessage
-from graia.ariadne.event.mirai import MemberLeaveEventQuit
-from graia.ariadne.message.chain import MessageChain
-from graia.ariadne.model import Group, MiraiSession, Member
-from graia.scheduler import GraiaScheduler
 import pkgutil
-from pathlib import Path
+
+from creart import create
 from graia.ariadne.app import Ariadne
-from graia.ariadne.model import MiraiSession
+from graia.ariadne.connection.config import (
+    HttpClientConfig,
+    WebsocketClientConfig,
+    config,
+)
 from graia.saya import Saya
-from graia.saya.builtins.broadcast import BroadcastBehaviour
-from graia.scheduler.saya import GraiaSchedulerBehaviour
-from graia.ariadne.message.element import Forward, ForwardNode, Image, Voice
-from graiax import silkcoder
 
 app = Ariadne(
-    MiraiSession(
-        host="http://localhost:8060",  # 同 MAH 的 port
-        verify_key="zzzzzz",  # 同 MAH 配置的 verifyKey
-        account=3314535510,  # 机器人 QQ 账号
+    connection=config(
+        123456,  # 你的机器人的 qq 号
+        "123456",  # 填入你的 mirai-api-http 配置中的 verifyKey
+        # 以下两行代码（不含注释）里的 host 参数的地址
+        # 是你的 mirai-api-http 地址中的地址与端口
+        # 他们默认为 "http://localhost:8080"
+        # 如果你 mirai-api-http 的地址与端口也是 localhost:8080
+        # 就可以删掉这两行，否则需要修改为 mirai-api-http 的地址与端口
+        HttpClientConfig(host="http://127.0.0.1:8080"),
+        WebsocketClientConfig(host="http://127.0.0.1:8080"),
     ),
 )
-saya = app.create(Saya)
-
-app.create(GraiaScheduler)
-
-saya.install_behaviours(
-    app.create(BroadcastBehaviour),
-    app.create(GraiaSchedulerBehaviour),
-)
-
+saya = create(Saya)
 
 with saya.module_context():
     for module_info in pkgutil.iter_modules(["modules"]):
-        saya.require("modules." + module_info.name)
-
-bcc = app.broadcast
-
-@bcc.receiver("MemberLeaveEventQuit")
-async def tuiqun(app: Ariadne, group: Group, message: MemberLeaveEventQuit):
-    if group.id == 812057174:
-        return
-    await app.sendMessage(
-        group,
-        MessageChain.create(f'退群通知：\n@{message.member.name}({message.member.id})\n退出了本群！'),
-    )
-
-@bcc.receiver(GroupMessage)
-async def setu(app: Ariadne, group: Group, message: MessageChain):
-    # if str(message) == "你好":
-    #     await app.sendMessag(
-    #         group,
-    #         MessageChain.create(f"不要说{message.asDisplay()}，来点涩图"),
-    #     )
-
-    if str(message) == "周年皮肤包":
-        await app.sendMessage(
-            group,
-            MessageChain.create(f"周年皮肤包链接：https://zihao-il.github.io/index2.html"),
-        )
-    if str(message) == "鼻涕的肯定":
-        await app.sendMessage(
-            group,
-            MessageChain.create(Image(path=Path("data/鼻涕的肯定.jpg"))),
-        )
-    if str(message) == "鼻涕骂我":
-        for i in range(1, 4):
-            voice_bytes = await silkcoder.async_encode(f"data/鼻涕傻逼{i}.wav")
-            await app.sendGroupMessage(group, MessageChain.create(Voice(data_bytes=voice_bytes)))
+        if module_info.name.startswith("_"):
+            continue
+        saya.require(f"modules.{module_info.name}")
 
 app.launch_blocking()
-
-
