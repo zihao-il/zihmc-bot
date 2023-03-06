@@ -14,19 +14,18 @@ channel = Channel.current()
 
 @channel.use(ListenerSchema(listening_events=[NudgeEvent]))
 async def get_nudge(app: Ariadne, event: NudgeEvent):
-    if event.context_type == "group":
-        if await Sql.is_open(event.group_id):
-            await app.send_group_message(
-                event.group_id,
-                MessageChain("不要戳我QAQ")
-            )
-    elif event.context_type == "friend":
-        await app.send_friend_message(
-            event.friend_id,
-            MessageChain("戳我干嘛！")
-        )
-    else:
-        return
+    if await Sql.is_open(event.subject['id']):
+        if event.subject['kind'] == "Group":
+            if event.target == 375911869:
+                try:
+                    await app.mute_member(event.subject['id'], event.supplicant, 15)
+                except:
+                    pass
+                return await app.send_group_message(
+                    event.subject['id'], "不要戳我QAQ")
+        elif event.subject['kind'] == "Friend":
+            return await app.send_friend_message(
+                event.subject['id'], "戳我干嘛！")
 
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage], decorators=[MatchContent("戳我")], ))

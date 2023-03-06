@@ -17,7 +17,7 @@ channel = Channel.current()
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage], decorators=[MatchContent("抽签")], ))
 async def lot(app: Ariadne, group: Group, member: Member, message: MessageChain):
-    if await Sql.is_open(group.id):
+    if await Sql.is_open(group.id, 'is_lot'):
         r_num = random.randint(1, 100)
         now_time = datetime.datetime.now().strftime('%Y-%m-%d')
         try:

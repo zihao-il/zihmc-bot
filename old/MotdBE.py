@@ -3,20 +3,20 @@ import socket
 import struct
 import time
 
-from graia.amnesia.message import MessageChain
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
-from graia.ariadne.message.parser.twilight import Twilight, RegexMatch, MatchResult, WildcardMatch
+from graia.ariadne.message.chain import MessageChain
+from graia.ariadne.message.element import At
+from graia.ariadne.message.parser.twilight import Twilight, WildcardMatch, MatchResult, \
+    RegexMatch
 from graia.ariadne.model import Group, Member
 from graia.saya import Channel
 from graia.saya.builtins.broadcast import ListenerSchema
 
-from modules.mysql import Sql
-
 channel = Channel.current()
 
 
-async def motd_be(ip: str, port: int = 19132):
+async def motdbe(ip: str, port: int):
     try:
         client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         client.settimeout(3)
@@ -45,22 +45,24 @@ async def motd_be(ip: str, port: int = 19132):
         return msg
 
 
-@channel.use(
-    ListenerSchema(listening_events=[GroupMessage],
-                   inline_dispatchers=[
-                       Twilight([RegexMatch(r'/MotdBE').flags(re.I), "ipaddr" @ WildcardMatch(), ])], ))
-async def get_be_motd(app: Ariadne, group: Group, member: Member, message: MessageChain, ipaddr: MatchResult):
-    if await Sql.is_open(group.id):
-        try:
-            ip_port = str(ipaddr.result)
-            if bool(re.findall(":", ip_port)):
-                ip, port = ip_port.split(":")
-                ip = str(ip)
-                port = int(str(port))
-            else:
-                ip = str(ip_port)
-                port = 19132
+@channel.use(ListenerSchema(
+    listening_events=[GroupMessage],
+    inline_dispatchers=[Twilight(
+        [RegexMatch(r"/MotdBE").flags(re.RegexFlag(re.I)),
+         WildcardMatch() @ "ip_port"]
+    )]
+))
+async def motdbemsg(app: Ariadne, group: Group, member: Member, ip_port: MatchResult):
+    try:
+        ip_port = str(ip_port.result)
+        if bool(re.findall(":", ip_port)):
+            ip, port = ip_port.split(":")
+            ip = str(ip)
+            port = int(str(port))
+        else:
+            ip = str(ip_port)
+            port = 19132
 
-            await app.send_message(group, await motd_be(ip, port))
-        except:
-            pass
+        await app.sendMessage(group, MessageChain.create(At(member.id), f"\n", await motdbe(ip, port)))
+    except:
+        await app.sendMessage(group, MessageChain.create(At(member.id), f"\n格式错误！\n例如：/MotdBE 127.0.0.1:19132"))
