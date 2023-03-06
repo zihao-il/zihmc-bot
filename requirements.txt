@@ -7,6 +7,5 @@ graia-scheduler
 re
 random
 datetime
-configparser
 Pillow
 pymysql
