@@ -21,13 +21,13 @@ async def lot(app: Ariadne, group: Group, member: Member, message: MessageChain)
         r_num = random.randint(1, 100)
         now_time = datetime.datetime.now().strftime('%Y-%m-%d')
         try:
-            await Sql.get_group_field('lot_time', group.id, member.id)
+            await Sql.get_qqlist(member.id, 'lot_time')
         except:
-            await Sql.add_qq(group.id, member.id)
-        lot_time = await Sql.get_group_field('lot_time', group.id, member.id)
+            await Sql.add_qqlist(member.id)
+        lot_time = await Sql.get_qqlist(member.id, 'lot_time')
         if now_time != str(lot_time):
             await app.send_message(group, MessageChain([At(member.id), Plain("\n"), await Sql.get_lots(r_num)]), )
-            await Sql.update_group_field("lot_time", now_time, group.id, member.id)
+            await Sql.update_qqlist(member.id, "lot_time", now_time)
         else:
             await app.send_message(group,
                                    MessageChain([At(member.id), Plain("\n每天仅能求一签，若想改运，等到明日再来！")]), )
