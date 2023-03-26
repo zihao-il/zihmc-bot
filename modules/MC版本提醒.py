@@ -1,6 +1,3 @@
-import json
-
-import requests
 from graia.amnesia.message import MessageChain
 from graia.ariadne.app import Ariadne
 from graia.ariadne.message.element import Plain
@@ -20,8 +17,9 @@ async def mcbv(app: Ariadne):
     version = []
     verlist = (await Sql.get_mcversion('version_list')).split("|")
     try:
-        mcr = requests.get("https://bugs.mojang.com/rest/api/2/project/10200/versions", headers=headers)
-        mc_json = json.loads(mcr.text)
+        session = Ariadne.service.client_session
+        async with session.get("https://bugs.mojang.com/rest/api/2/project/10200/versions", headers=headers) as resp:
+            mc_json = await resp.json()
         for v in mc_json:
             if not v['archived'] and v['released']:
                 version.append(v['description'])

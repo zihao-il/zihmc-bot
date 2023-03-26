@@ -1,6 +1,5 @@
 import asyncio
 
-import requests
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.message.chain import MessageChain
@@ -15,16 +14,13 @@ from modules.mysql import Sql
 
 channel = Channel.current()
 
-headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36"}
-
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage], decorators=[MatchContent("来份涩图")]))
 async def setu(app: Ariadne, member: Member, group: Group):
     if await Sql.is_open(group.id):
         if await Sql.get_group_field('purview', group.id, member.id) > 0:
-            r = requests.get("https://iw233.cn/api.php?sort=random", allow_redirects=False).headers.get('Location')
-            bot_message = await app.send_message(group, MessageChain(Image(url=r)))
+            bot_message = await app.send_group_message(group,
+                                                       MessageChain(Image(url="https://iw233.cn/api.php?sort=random")))
             await asyncio.sleep(30)
             await app.recall_message(bot_message)
         else:

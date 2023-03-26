@@ -1,6 +1,3 @@
-import json
-
-import requests
 from graia.ariadne.app import Ariadne
 from graia.ariadne.message.chain import MessageChain
 from graia.saya import Channel
@@ -18,13 +15,13 @@ sections = [{'name': 'fb_Beta',
              'url': 'https://minecraftfeedback.zendesk.com/api/v2/help_center/en-us/sections/360001186971/articles?per_page=5'}]
 
 
-#
 @channel.use(SchedulerSchema(timers.every_custom_minutes(1)))
 async def fbbv(app: Ariadne):
     for sv in sections:
         try:
-            mcfb = requests.get(sv["url"], headers=headers, timeout=5)
-            mcfb_json = json.loads(mcfb.text)
+            session = Ariadne.service.client_session
+            async with session.get(sv["url"], headers=headers, timeout=5) as resp:
+                mcfb_json = await resp.json()
         except:
             return
         fb_name = mcfb_json["articles"][0]["name"]
