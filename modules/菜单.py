@@ -1,6 +1,7 @@
 from graia.amnesia.message import MessageChain
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
+from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.message.parser.twilight import WildcardMatch, MatchResult, Twilight, RegexMatch
 from graia.ariadne.model import Group
 from graia.ariadne.model import Member
@@ -23,3 +24,10 @@ async def menu(app: Ariadne, member: Member, group: Group, message: MessageChain
         answer = await Sql.get_chatlist(str(text.result))
         if len(answer) != 0:
             await app.send_message(group, answer[0][0])
+
+
+@channel.use(ListenerSchema(listening_events=[GroupMessage], decorators=[MatchContent("菜单")], ))
+async def menu_main(app: Ariadne, member: Member, group: Group, message: MessageChain):
+    if await Sql.is_open(group.id):
+        answer = await Sql.get_chatlist('菜单')
+        await app.send_message(group, answer[0][0])
