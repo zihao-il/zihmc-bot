@@ -15,6 +15,7 @@ channel = Channel.current()
 @channel.use(ListenerSchema(listening_events=[NudgeEvent]))
 async def get_nudge(app: Ariadne, event: NudgeEvent):
     if event.target == (await app.get_bot_list())[0]:
+        print(event.subject['id'])
         if await Sql.is_open(event.subject['id']):
             if event.subject['kind'] == "Group" and app.default_account == event.target:
 

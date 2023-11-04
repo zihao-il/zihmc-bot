@@ -11,7 +11,7 @@
  Target Server Version : 80028 (8.0.28)
  File Encoding         : 65001
 
- Date: 28/03/2023 15:56:33
+ Date: 04/11/2023 08:46:29
 */
 
 SET NAMES utf8mb4;
@@ -57,19 +57,21 @@ CREATE TABLE `chat_list`  (
 -- ----------------------------
 -- Records of chat_list
 -- ----------------------------
-INSERT INTO `chat_list` VALUES ('菜单', '—————菜单—————\r\n☀️.日常功能     🔍.聊天功能\r\n🏦.银行功能     🔑.卡密功能\r\n✨.会员功能     🎤.点歌功能\r\n🚟.排行系统     🐟.摸鱼功能 \r\n👊.群管功能     Ⓜ️.M C 功能\r\n🧹.杂项功能     💨.运行状态 \r\n\r\nps：\'.\'可以换成\'！\' \'!\' \'#\'\r\n————————————', 1);
+INSERT INTO `chat_list` VALUES ('菜单', '—————菜单—————\r\n☀️.日常功能     🔍.聊天功能\r\n🏦.银行功能     🔑.卡密功能\r\n✨.会员功能     🎤.点歌功能\r\n🚟.排行系统     🐟.摸鱼功能 \r\n👊.群管功能     Ⓜ️.M C 功能\r\n🧹.杂项功能     💨.运行状态 \r\n\r\nps：前面带点要加点！！\r\n\'.\'可以换成\'！\' \'!\' \'#\'\r\n————————————', 1);
 INSERT INTO `chat_list` VALUES ('日常功能', '————日常功能————\r\n🏷️签到    🤏戳我     📑抽签 \r\n💰钱包    📜积分     🪙充值\r\n🤐禁言抽奖      😍来份涩图\r\n😴大家晚安\r\n🥰嘤嘤嘤💫你好🌦️XX天气  \r\n————————————', 1);
 INSERT INTO `chat_list` VALUES ('聊天功能', '————聊天功能————\r\n@蜜桃酱 发送你要问的信息\r\n例如：\r\n@蜜桃酱 你是谁\r\n————————————', 1);
 INSERT INTO `chat_list` VALUES ('银行功能', '————银行功能————\r\n🗄️存款    🏧取款    💈转账\r\n\r\n💰银行余额     🤑领取利息\r\n\r\n例如：\r\n存(取)款100\r\n转账@蜜桃酱 100\r\n————————————', 1);
 INSERT INTO `chat_list` VALUES ('卡密功能', '————卡密功能————\r\n卡密充值[你的卡密]\r\n例如：卡密充值114514\r\n————————————', 1);
-INSERT INTO `chat_list` VALUES ('会员功能', '————会员功能————\r\n💸购买会员[X个月(年)]\r\n🗓️会员到期时间\r\n\r\n列如：购买会员3个月\r\n————————————', 1);
+INSERT INTO `chat_list` VALUES ('会员功能', '————会员功能————\r\n💸购买会员[X个月(年)]\r\n🗓️会员到期时间\r\n\r\n例如：购买会员3个月\r\n————————————', 1);
 INSERT INTO `chat_list` VALUES ('排行系统', '————排行系统————\r\n💰财富排行榜\r\n🔥连签排行榜\r\n🗓️签到排行榜\r\n💦活跃排行榜\r\n🏮会员排行榜\r\n————————————', 1);
 INSERT INTO `chat_list` VALUES ('点歌功能', '————点歌功能————\r\n💿网易云点歌\r\n📀酷我点歌\r\n\r\n例如:\r\n酷我(网易云)点歌XXX\r\nps：酷我支持多选\r\n每次点歌需要消耗100蜜桃币\r\n————————————', 1);
 INSERT INTO `chat_list` VALUES ('摸鱼功能', '————摸鱼功能————\r\n🦈摸鱼X次\r\n🍥摸鱼记录\r\n🎣摸鱼排行榜\r\n🛎️领取摸鱼成就\r\n\r\n例如:\r\n摸鱼10次\r\nps：鱼多可获得成就\r\n每次摸鱼需要消耗200蜜桃币\r\n————————————', 1);
 INSERT INTO `chat_list` VALUES ('群管功能', '————群管功能————\r\n🤐[解除]禁言\r\n❌撤回\r\n\r\n*开启(关闭)全员禁言\r\n*添加(删除)管理员\r\n*更新成员列表\r\n*[解除]拉黑\r\n*踢黑\r\n例如:\r\n禁言@蜜桃酱 1天2小时3分钟\r\n左滑消息输入\'撤回\'发送即可\r\n————————————', 1);
-INSERT INTO `chat_list` VALUES ('MC功能', '————MC功能————\r\n👚皮肤获取\r\n✉️/MotdBE\r\n🆔/id表[物品名]\r\n🗺️Minecraft\r\n\r\n例如:\r\n皮肤获取 Steve\r\n/MotdBE 127.0.0.1:19132\r\nps：\r\n👚只能获取Java正版用户的皮肤\r\n✉️获取BE版本服务器信息\r\n🗺️获取MC版本下载链接\r\n————————————', 1);
-INSERT INTO `chat_list` VALUES ('杂项功能', '————杂项功能————\r\n🧧发红包X个Y\r\n❤️查看对象\r\n⚫获取黑白头像\r\n📇我的周年纪念卡片\r\n💲支付宝到账X\r\n🌸日语XXX\r\n\r\n例如:\r\n发红包10个1000\r\n支付宝到账100\r\n日语変態\r\n————————————', 1);
+INSERT INTO `chat_list` VALUES ('MC功能', '————MC功能————\r\n👚皮肤获取[用户名]\r\n✉️/MotdBE\r\n🆔/id表[物品名]\r\n🗺️Minecraft\r\n🔍版本搜索[版本号]\r\n\r\n例如:\r\n皮肤获取 Steve\r\n/MotdBE 127.0.0.1:19132\r\n版本搜索1.14.514\r\nps：\r\n👚只能获取Java正版用户的皮肤\r\n✉️获取BE版本服务器信息\r\n🗺️获取MC版本下载链接\r\n————————————', 1);
+INSERT INTO `chat_list` VALUES ('杂项功能', '—————杂项功能—————\r\n🧧发红包X个Y   ⚫获取黑白头像\r\n❤️查看对象     ⌨️(本周)上周词云\r\n💲支付宝到账X        🌸日语XXX\r\n🆓EPIC周免            😃emoji合成\r\n📇我的周年纪念卡片       🖋️一言\r\n🐶舔狗日记(图)           👀看图片\r\n\r\n例如:\r\n发红包10个1000\r\n支付宝到账100\r\n日语変態\r\nemoji合成😃+😁\r\n——————————————', 1);
 INSERT INTO `chat_list` VALUES ('摸鱼排行榜', '————摸鱼排行榜————\r\n🐟咸鱼排行榜\r\n🐟大咸鱼排行榜\r\n🐟金色咸鱼排行榜\r\n🐟七彩大咸鱼排行榜\r\n————————————', 1);
+INSERT INTO `chat_list` VALUES ('Minecraft', '基岩版(手机)：\r\n1.19.X：\r\nhttps://www.123pan.com/s/dhm9-O9N0A\r\n1.20.X:\r\nhttps://www.123pan.com/s/dhm9-gxO0A\r\n旧版本下载：\r\nhttps://mc233.endyun.ltd\r\nhttp://bbk.endyun.ltd\r\nAPP下载：\r\nhttps://www.123pan.com/s/dhm9-6bD0A.html\r\nMinecraft版本命名解释：\r\nhttps://docs.qq.com/doc/DY3RZaGhBQnphdlpI\r\n\r\nJava版启动器(电脑)：\r\nhttps://zihao-il.lanzouo.com/b0rwozud', 1);
+INSERT INTO `chat_list` VALUES ('抽奖功能', '————抽奖功能————\r\n🏆发起抽奖 [标题] [中奖人数]人 [简介]\r\n➕参加[标题]抽奖\r\n✉️[标题]抽奖信息\r\n🎁[标题]开奖\r\n🧧[标题]中奖查询\r\n\r\n————————————', 1);
 
 -- ----------------------------
 -- Table structure for draw_lots
@@ -200,6 +202,43 @@ CREATE TABLE `founder`  (
 INSERT INTO `founder` VALUES (1767927045);
 
 -- ----------------------------
+-- Table structure for group_933238308
+-- ----------------------------
+DROP TABLE IF EXISTS `group_933238308`;
+CREATE TABLE `group_933238308`  (
+  `QQ` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'QQ号',
+  `Money` int NOT NULL DEFAULT 0 COMMENT '蜜桃币',
+  `bank_money` int NOT NULL DEFAULT 0 COMMENT '银行金额',
+  `sign_time` date NOT NULL DEFAULT '1970-01-01' COMMENT '签到时间',
+  `even_sign` int NOT NULL DEFAULT 0 COMMENT '连续签到天数',
+  `total_sign` int NOT NULL DEFAULT 0 COMMENT '总共签到天数',
+  `vip_time` bigint NOT NULL DEFAULT 0 COMMENT '会员到期时间，时间戳',
+  `treasure_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '宝物数据： ’ | ‘ 分开',
+  `purview` int NOT NULL DEFAULT 0 COMMENT '权限 0：群员，1：管理员，2：主人，3：创始人',
+  `interest_time` date NOT NULL DEFAULT '1970-01-01' COMMENT '领取利息时间',
+  `say_num` int NULL DEFAULT 0 COMMENT '发言数量',
+  PRIMARY KEY (`QQ`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group_933238308
+-- ----------------------------
+INSERT INTO `group_933238308` VALUES ('1767927045', 9059296, 3723027, '2023-11-04', 140, 247, 2527174861, '已加入帮派|武林盟主称号|年|新|群二周年纪念卡片|对象|普通月饼|蛋黄月饼|蜜桃酱月饼|2021中秋纪念勋章', 3, '2023-08-11', 6617);
+
+-- ----------------------------
+-- Table structure for is_execute
+-- ----------------------------
+DROP TABLE IF EXISTS `is_execute`;
+CREATE TABLE `is_execute`  (
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `value` tinyint NULL DEFAULT 0
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of is_execute
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for kami
 -- ----------------------------
 DROP TABLE IF EXISTS `kami`;
@@ -207,12 +246,34 @@ CREATE TABLE `kami`  (
   `uuid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '卡密uuid',
   `type` enum('vip','money') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'money' COMMENT '卡密类型',
   `value` bigint NOT NULL DEFAULT 1000 COMMENT '额度',
+  `count` int NOT NULL DEFAULT 1 COMMENT '剩余次数',
+  `recharged_qq` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '已经充值过的QQ',
   PRIMARY KEY (`uuid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of kami
 -- ----------------------------
+INSERT INTO `kami` VALUES ('群主真帅气', 'money', 1, 986, '');
+
+-- ----------------------------
+-- Table structure for lottery_draw
+-- ----------------------------
+DROP TABLE IF EXISTS `lottery_draw`;
+CREATE TABLE `lottery_draw`  (
+  `qq` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  `join_qq` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  `win_num` int NULL DEFAULT NULL,
+  `win_qq` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  `is_open` int NULL DEFAULT 1
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of lottery_draw
+-- ----------------------------
+INSERT INTO `lottery_draw` VALUES ('1767927045', '测试', '标题', '1767927045|', 1, '1767927045', 0);
 
 -- ----------------------------
 -- Table structure for mc_data
@@ -227,11 +288,11 @@ CREATE TABLE `mc_data`  (
 -- ----------------------------
 -- Records of mc_data
 -- ----------------------------
-INSERT INTO `mc_data` VALUES ('fb_Beta', 'Minecraft Beta & Preview - 1.19.80.22');
-INSERT INTO `mc_data` VALUES ('fb_open_group', '114514');
-INSERT INTO `mc_data` VALUES ('fb_Release', 'Minecraft - 1.19.72 (Bedrock)');
-INSERT INTO `mc_data` VALUES ('version_list', '1.19.70.23 Preview|1.19.62|1.19.70.24 Preview|1.19.70.24/25 Preview|1.19.63|1.19.70.26 Preview|1.19.80.20 Preview|1.19.70|1.19.80.21 Preview|1.19.71|1.19.72|1.19.80.22 Preview');
-INSERT INTO `mc_data` VALUES ('version_open_group', '114514');
+INSERT INTO `mc_data` VALUES ('fb_Beta', 'Minecraft Beta & Preview - 1.20.50.23');
+INSERT INTO `mc_data` VALUES ('fb_open_group', '933238308|812057174');
+INSERT INTO `mc_data` VALUES ('fb_Release', 'Minecraft - 1.20.41 (Bedrock)');
+INSERT INTO `mc_data` VALUES ('version_list', '1.20.50.20 Preview|1.20.50.21 Preview|1.20.40|1.20.50.22 Preview');
+INSERT INTO `mc_data` VALUES ('version_open_group', '933238308|812057174');
 
 -- ----------------------------
 -- Table structure for qq_group
@@ -257,6 +318,7 @@ CREATE TABLE `qq_group`  (
 -- ----------------------------
 -- Records of qq_group
 -- ----------------------------
+INSERT INTO `qq_group` VALUES (933238308, 1, 1, '欢迎加入Minecraft资源群(′▽`??)\r\n我是本群的辣鸡机器人氺蜜桃ぎ y( ˙?. )\r\n氺蜜桃ぎ 温馨提醒您(*^ω^*)\r\n规则千万条\r\n群规第一条\r\n用语不规范\r\n离别两行泪\r\n特请注意凡是退群、被踢，都会被拉黑\r\n氺蜜桃ぎ 可不想在黑名单见到你哟 mua~\r\n发送“.菜单”获得菜单列表.\r\n发送Minecraft获取游戏下载地址\r\n进群半个小时不发言将被踢出群！！！', '退出了本群！', 1, 180, 0, 8000, 'vpn|肏|迷你世界|习近平|贱鸡|鸡巴|刷钻|教程地址|傻逼|返现|套现', 1, 1800, 0);
 
 -- ----------------------------
 -- Table structure for qq_list
@@ -265,6 +327,7 @@ DROP TABLE IF EXISTS `qq_list`;
 CREATE TABLE `qq_list`  (
   `QQ` bigint NOT NULL,
   `lot_time` date NOT NULL DEFAULT '1970-01-01',
+  `tarot_time` date NULL DEFAULT NULL,
   PRIMARY KEY (`QQ`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
@@ -302,5 +365,20 @@ CREATE TABLE `touch_fish`  (
 -- ----------------------------
 -- Records of touch_fish
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for zuiyou
+-- ----------------------------
+DROP TABLE IF EXISTS `zuiyou`;
+CREATE TABLE `zuiyou`  (
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  `values` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of zuiyou
+-- ----------------------------
+INSERT INTO `zuiyou` VALUES ('审帖员', '1767927045|');
+INSERT INTO `zuiyou` VALUES ('审帖中', '0');
 
 SET FOREIGN_KEY_CHECKS = 1;

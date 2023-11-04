@@ -1,6 +1,6 @@
 from graia.amnesia.message import MessageChain
 from graia.ariadne.app import Ariadne
-from graia.ariadne.message.element import Plain
+from graia.ariadne.message.element import Plain, Image
 from graia.saya import Channel
 from graia.scheduler import timers
 from graia.scheduler.saya import SchedulerSchema
@@ -30,6 +30,7 @@ async def mcbv(app: Ariadne):
             verlist.append(v)
             for g in (await Sql.get_mcversion('version_open_group')).split("|"):
                 await app.send_group_message(int(g),
-                                             MessageChain([Plain(f'你有新的Minecraft版本请注意查收：\n版本号：{v}')]))
+                                             MessageChain([Plain(f'你有新的Minecraft版本请注意查收：\n版本号：{v}'),
+                                                           Image(path='data/版本更新图.png')]))
             newver = "|".join(verlist)
             await Sql.change_mcversion('version_list', newver)

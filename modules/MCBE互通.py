@@ -33,8 +33,8 @@ async def ws_mcserver(app: Ariadne, group: Group, member: Member, message: Messa
         if group.id == g.id:
             return str(event.message_chain), event.sender.name
 
-    url = "ws://127.0.0.1:29132/mcws"
-    password = "114514"
+    url = "ws://127.0.0.1:19132/mcws"
+    password = "password114514"
 
     async def aes_cbc_encrypt(text, pwd):
         md5 = hashlib.md5()
