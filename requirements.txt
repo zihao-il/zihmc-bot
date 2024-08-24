@@ -1,4 +1,4 @@
-graia-ariadne
+graia-ariadne[full]
 graia-saya
 graiax-silkcoder
 graiax-silkcoder[ffmpeg]
@@ -9,3 +9,8 @@ random
 datetime
 Pillow
 pymysql
+websockets
+jieba
+pycryptodome
+cn2an
+psutil
