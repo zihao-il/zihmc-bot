@@ -2,11 +2,7 @@ graia-ariadne[full]
 graia-saya
 graiax-silkcoder
 graiax-silkcoder[ffmpeg]
-requests
 graia-scheduler
-re
-random
-datetime
 Pillow
 pymysql
 websockets
@@ -14,3 +10,5 @@ jieba
 pycryptodome
 cn2an
 psutil
+numpy
+WordCloud
